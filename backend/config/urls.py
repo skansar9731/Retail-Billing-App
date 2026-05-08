@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.shortcuts import redirect
-
+from authentication.views import logout_view
 
 def home_redirect(request):
 
@@ -45,5 +45,11 @@ urlpatterns = [
         'dashboard/',
         include('dashboard.urls')
     ),
+
+   path(
+    'logout/',
+    logout_view,
+    name='logout'
+),
 
 ]
