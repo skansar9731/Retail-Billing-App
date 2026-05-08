@@ -1,0 +1,708 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Dashboard
+    </title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <script>
+
+        tailwind.config = {
+
+            theme: {
+
+                extend: {
+
+                    fontFamily: {
+
+                        poppins: ['Poppins', 'sans-serif']
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    </script>
+
+</head>
+
+<body
+    class="
+        font-poppins
+        min-h-screen
+        bg-[#020617]
+        text-white
+        flex
+    "
+>
+
+    <!-- Background -->
+
+    <div
+        class="
+            fixed
+            inset-0
+            -z-10
+            overflow-hidden
+        "
+    >
+
+        <div
+            class="
+                absolute
+                inset-0
+                bg-gradient-to-br
+                from-slate-950
+                via-blue-950
+                to-black
+            "
+        ></div>
+
+        <div
+            class="
+                absolute
+                top-[-100px]
+                left-[-100px]
+                h-[450px]
+                w-[450px]
+                rounded-full
+                bg-cyan-500/20
+                blur-3xl
+            "
+        ></div>
+
+        <div
+            class="
+                absolute
+                bottom-[-150px]
+                right-[-150px]
+                h-[500px]
+                w-[500px]
+                rounded-full
+                bg-purple-500/20
+                blur-3xl
+            "
+        ></div>
+
+    </div>
+
+    <!-- Overlay -->
+
+    <div
+        id="sidebarOverlay"
+        class="
+            fixed
+            inset-0
+            z-50
+            hidden
+            bg-black/60
+            backdrop-blur-sm
+            lg:hidden
+        "
+    ></div>
+
+    <!-- Sidebar -->
+
+    <aside
+        id="sidebar"
+        class="
+            fixed
+            top-0
+            left-0
+            z-[60]
+            flex
+            h-screen
+            w-72
+            flex-col
+            justify-between
+            border-r
+            border-white/10
+            bg-slate-900/80
+            p-6
+            backdrop-blur-2xl
+            transition-transform
+            duration-300
+            max-lg:-translate-x-full
+            lg:translate-x-0
+        "
+    >
+
+        <div>
+
+            <div class="mb-10">
+
+                <h1
+                    class="
+                        text-4xl
+                        font-bold
+                        bg-gradient-to-r
+                        from-blue-400
+                        to-purple-500
+                        bg-clip-text
+                        text-transparent
+                    "
+                >
+                    Retail Billing
+                </h1>
+
+                <p
+                    class="
+                        mt-2
+                        text-gray-400
+                    "
+                >
+                    Electronics Shop
+                </p>
+
+            </div>
+
+            <!-- Navigation -->
+
+            <nav class="space-y-4">
+
+                <a
+                    href="#"
+                    class="
+                        flex
+                        items-center
+                        gap-4
+                        rounded-3xl
+                        bg-blue-500/20
+                        px-5
+                        py-4
+                        text-blue-400
+                        transition-all
+                        hover:scale-105
+                    "
+                >
+                    📊 Dashboard
+                </a>
+
+                <a
+                    href="#"
+                    class="
+                        flex
+                        items-center
+                        gap-4
+                        rounded-3xl
+                        px-5
+                        py-4
+                        text-gray-300
+                        transition-all
+                        hover:bg-white/10
+                        hover:scale-105
+                    "
+                >
+                    💰 Transactions
+                </a>
+
+                <a
+                    href="#"
+                    class="
+                        flex
+                        items-center
+                        gap-4
+                        rounded-3xl
+                        px-5
+                        py-4
+                        text-gray-300
+                        transition-all
+                        hover:bg-white/10
+                        hover:scale-105
+                    "
+                >
+                    📦 Stock
+                </a>
+
+                <a
+                    href="#"
+                    class="
+                        flex
+                        items-center
+                        gap-4
+                        rounded-3xl
+                        px-5
+                        py-4
+                        text-gray-300
+                        transition-all
+                        hover:bg-white/10
+                        hover:scale-105
+                    "
+                >
+                    🔁 Returns
+                </a>
+
+            </nav>
+
+        </div>
+
+        <!-- Logout -->
+
+        <a
+            href="/logout/"
+            class="
+                flex
+                items-center
+                justify-center
+                gap-3
+                rounded-3xl
+                bg-red-500/20
+                py-4
+                text-red-400
+                transition-all
+                hover:scale-105
+            "
+        >
+            🚪 Logout
+        </a>
+
+    </aside>
+
+    <!-- Main -->
+
+    <main class="flex-1 lg:ml-72">
+
+        <!-- Navbar -->
+
+        <header
+            class="
+                sticky
+                top-0
+                z-40
+                flex
+                items-center
+                justify-between
+                border-b
+                border-white/10
+                bg-slate-900/60
+                px-6
+                py-5
+                backdrop-blur-2xl
+                shadow-[0_10px_40px_rgba(0,0,0,0.4)]
+            "
+        >
+
+            <div class="flex items-center gap-4">
+
+                <button
+                    id="menuButton"
+                    class="
+                        rounded-2xl
+                        border
+                        border-white/10
+                        bg-white/10
+                        p-4
+                        lg:hidden
+                    "
+                >
+                    ☰
+                </button>
+
+                <div>
+
+                    <h2
+                        class="
+                            text-4xl
+                            font-bold
+                        "
+                    >
+                        Dashboard
+                    </h2>
+
+                    <p
+                        class="
+                            mt-1
+                            text-gray-400
+                        "
+                    >
+                        Welcome Back 👋
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- User -->
+
+            <div class="flex items-center gap-4">
+
+                <div class="hidden text-right sm:block">
+
+                    <h3 class="font-semibold">
+                        {{ request.user.username }}
+                    </h3>
+
+                    <p class="text-sm text-gray-400">
+                        Administrator
+                    </p>
+
+                </div>
+
+                <div
+                    class="
+                        flex
+                        h-16
+                        w-16
+                        items-center
+                        justify-center
+                        rounded-full
+                        bg-gradient-to-r
+                        from-blue-500
+                        to-purple-500
+                        text-2xl
+                        font-bold
+                        shadow-[0_0_40px_rgba(59,130,246,0.5)]
+                    "
+                >
+                    {{ request.user.username|first|upper }}
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- Content -->
+
+        <section class="p-6">
+
+            <div
+                class="
+                    grid
+                    grid-cols-1
+                    gap-6
+                    md:grid-cols-2
+                    xl:grid-cols-4
+                "
+            >
+
+                <!-- Card -->
+
+                <div
+                    class="
+                        rounded-[32px]
+                        border
+                        border-white/10
+                        bg-white/[0.06]
+                        p-6
+                        backdrop-blur-2xl
+                        transition-all
+                        duration-500
+                        hover:-translate-y-2
+                        hover:border-blue-400/30
+                    "
+                >
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+
+                            <p class="text-gray-400">
+                                Today's Sales
+                            </p>
+
+                            <h2
+                                class="
+                                    mt-4
+                                    text-5xl
+                                    font-bold
+                                "
+                            >
+                                ₹45K
+                            </h2>
+
+                        </div>
+
+                        <div
+                            class="
+                                flex
+                                h-20
+                                w-20
+                                items-center
+                                justify-center
+                                rounded-3xl
+                                bg-blue-500/20
+                                text-4xl
+                            "
+                        >
+                            💰
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Card -->
+
+                <div
+                    class="
+                        rounded-[32px]
+                        border
+                        border-white/10
+                        bg-white/[0.06]
+                        p-6
+                        backdrop-blur-2xl
+                        transition-all
+                        duration-500
+                        hover:-translate-y-2
+                        hover:border-green-400/30
+                    "
+                >
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+
+                            <p class="text-gray-400">
+                                Profit
+                            </p>
+
+                            <h2
+                                class="
+                                    mt-4
+                                    text-5xl
+                                    font-bold
+                                "
+                            >
+                                ₹12K
+                            </h2>
+
+                        </div>
+
+                        <div
+                            class="
+                                flex
+                                h-20
+                                w-20
+                                items-center
+                                justify-center
+                                rounded-3xl
+                                bg-green-500/20
+                                text-4xl
+                            "
+                        >
+                            📈
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Card -->
+
+                <div
+                    class="
+                        rounded-[32px]
+                        border
+                        border-white/10
+                        bg-white/[0.06]
+                        p-6
+                        backdrop-blur-2xl
+                        transition-all
+                        duration-500
+                        hover:-translate-y-2
+                        hover:border-purple-400/30
+                    "
+                >
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+
+                            <p class="text-gray-400">
+                                Stock Items
+                            </p>
+
+                            <h2
+                                class="
+                                    mt-4
+                                    text-5xl
+                                    font-bold
+                                "
+                            >
+                                540
+                            </h2>
+
+                        </div>
+
+                        <div
+                            class="
+                                flex
+                                h-20
+                                w-20
+                                items-center
+                                justify-center
+                                rounded-3xl
+                                bg-purple-500/20
+                                text-4xl
+                            "
+                        >
+                            📦
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Card -->
+
+                <div
+                    class="
+                        rounded-[32px]
+                        border
+                        border-white/10
+                        bg-white/[0.06]
+                        p-6
+                        backdrop-blur-2xl
+                        transition-all
+                        duration-500
+                        hover:-translate-y-2
+                        hover:border-orange-400/30
+                    "
+                >
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+
+                            <p class="text-gray-400">
+                                Customers
+                            </p>
+
+                            <h2
+                                class="
+                                    mt-4
+                                    text-5xl
+                                    font-bold
+                                "
+                            >
+                                1.2K
+                            </h2>
+
+                        </div>
+
+                        <div
+                            class="
+                                flex
+                                h-20
+                                w-20
+                                items-center
+                                justify-center
+                                rounded-3xl
+                                bg-orange-500/20
+                                text-4xl
+                            "
+                        >
+                            👥
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Mobile Navbar -->
+
+    <nav
+        class="
+            fixed
+            bottom-0
+            left-0
+            right-0
+            z-50
+            flex
+            justify-around
+            border-t
+            border-white/10
+            bg-slate-900/80
+            py-4
+            backdrop-blur-2xl
+            lg:hidden
+        "
+    >
+
+        <a
+            href="#"
+            class="
+                text-3xl
+                text-blue-400
+            "
+        >
+            📊
+        </a>
+
+        <a
+            href="#"
+            class="
+                text-3xl
+                text-gray-400
+            "
+        >
+            💰
+        </a>
+
+        <a
+            href="#"
+            class="
+                text-3xl
+                text-gray-400
+            "
+        >
+            📦
+        </a>
+
+        <a
+            href="/logout/"
+            class="
+                text-3xl
+                text-red-400
+            "
+        >
+            🚪
+        </a>
+
+    </nav>
+
+    <!-- JS -->
+
+    <script src="{% static 'js/dashboard.js' %}"></script>
+
+</body>
+
+</html>
