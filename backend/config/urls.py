@@ -19,6 +19,7 @@ from django.urls import path, include
 from django.shortcuts import redirect
 from authentication.views import logout_view
 
+
 def home_redirect(request):
 
     return redirect('/login/')
@@ -51,5 +52,16 @@ urlpatterns = [
     logout_view,
     name='logout'
 ),
-
+path(
+    'transactions/',
+    include('transactions.urls')
+),
+path(
+    'parties/',
+    include('debts.urls')
+),
+path(
+    'debts/',
+    include('debts.urls')
+),
 ]

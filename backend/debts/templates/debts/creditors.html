@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Creditors
+    </title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <script>
+
+        tailwind.config = {
+
+            theme: {
+
+                extend: {
+
+                    fontFamily: {
+
+                        poppins: ['Poppins', 'sans-serif']
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    </script>
+
+</head>
+
+<body
+    class="
+        min-h-screen
+        overflow-x-hidden
+        bg-[#050816]
+        font-poppins
+        text-white
+    "
+>
+
+    <!-- Background -->
+
+    <div
+        class="
+            fixed
+            inset-0
+            bg-[radial-gradient(circle_at_top_left,_rgba(59,130,246,0.28),transparent_35%),radial-gradient(circle_at_bottom_right,_rgba(168,85,247,0.25),transparent_35%)]
+        "
+    ></div>
+
+    <!-- Main -->
+
+    <div
+        class="
+            relative
+            z-10
+            p-4
+            md:p-8
+        "
+    >
+
+{% include 'debts/common_party.html' with title='Creditors' form_action='/debts/save-creditor/' button_color='from-pink-500 to-purple-600' %}    </div>
+
+</body>
+
+</html>

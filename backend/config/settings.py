@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 'returns_app',
 'invoices',
 'auditlogs',
+'debts',
 ]
 
 MIDDLEWARE = [

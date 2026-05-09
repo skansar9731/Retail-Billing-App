@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>common-party</title>
+</head>
+<body>
+    <div
+    class="
+        rounded-[32px]
+        border
+        border-cyan-400/10
+        bg-gradient-to-br
+        from-[#091428]/95
+        via-[#101d3b]/95
+        to-[#1a1040]/95
+        p-6
+        md:p-8
+        shadow-[0_0_50px_rgba(34,211,238,0.12)]
+        backdrop-blur-3xl
+    "
+>
+
+    <!-- Header -->
+
+    <div
+        class="
+            mb-8
+            flex
+            items-center
+            justify-between
+        "
+    >
+
+        <div>
+
+            <h2
+                class="
+                    text-3xl
+                    font-bold
+                    text-white
+                "
+            >
+                {{ title }}
+            </h2>
+
+            <p
+                class="
+                    mt-2
+                    text-cyan-200/70
+                "
+            >
+                Manage all {{ title|lower }}
+            </p>
+
+        </div>
+
+        <!-- Dropdown -->
+
+        <select
+            class="
+                rounded-2xl
+                border
+                border-cyan-400/20
+                bg-[#081226]
+                px-5
+                py-3
+                text-white
+                outline-none
+            "
+        >
+
+            <option>Add</option>
+
+            <option>View</option>
+
+        </select>
+
+    </div>
+
+    <!-- Form -->
+
+<form
+    method="POST"
+    action="{{ form_action }}"
+>
+    {% csrf_token %}
+
+<div
+    class="
+        grid
+        grid-cols-1
+        gap-6
+        lg:grid-cols-3
+    "
+>
+
+    <!-- Party Name -->
+
+    <div class="relative">
+
+        <input
+            name="party_name"
+            type="text"
+            placeholder=" "
+            class="
+                peer
+                w-full
+                rounded-2xl
+                border
+                border-cyan-400/20
+                bg-white/5
+                px-5
+                pt-7
+                pb-3
+                text-white
+                outline-none
+
+                transition-all
+                duration-300
+
+                focus:border-cyan-300
+                focus:shadow-[0_0_25px_rgba(34,211,238,0.25)]
+            "
+        >
+
+        <label
+            class="
+                absolute
+                left-5
+                top-3
+                text-xs
+                text-cyan-300
+            "
+        >
+            Party Name
+        </label>
+
+    </div>
+
+    <!-- Mobile -->
+
+    <div class="relative">
+
+        <input
+            name="mobile_number"
+            type="text"
+            placeholder=" "
+            class="
+                peer
+                w-full
+                rounded-2xl
+                border
+                border-cyan-400/20
+                bg-white/5
+                px-5
+                pt-7
+                pb-3
+                text-white
+                outline-none
+
+                transition-all
+                duration-300
+
+                focus:border-cyan-300
+                focus:shadow-[0_0_25px_rgba(34,211,238,0.25)]
+            "
+        >
+
+        <label
+            class="
+                absolute
+                left-5
+                top-3
+                text-xs
+                text-cyan-300
+            "
+        >
+            Mobile Number
+        </label>
+
+    </div>
+
+    <!-- Address -->
+
+    <div class="relative">
+
+        <input
+            name="address"
+            type="text"
+            placeholder=" "
+            class="
+                peer
+                w-full
+                rounded-2xl
+                border
+                border-cyan-400/20
+                bg-white/5
+                px-5
+                pt-7
+                pb-3
+                text-white
+                outline-none
+
+                transition-all
+                duration-300
+
+                focus:border-cyan-300
+                focus:shadow-[0_0_25px_rgba(34,211,238,0.25)]
+            "
+        >
+
+        <label
+            class="
+                absolute
+                left-5
+                top-3
+                text-xs
+                text-cyan-300
+            "
+        >
+            Address
+        </label>
+
+    </div>
+
+</div>
+    <!-- Button -->
+
+    <button
+    type="submit"
+        class="
+            mt-8
+            w-full
+            rounded-2xl
+            bg-gradient-to-r
+            {{ button_color }}
+            py-4
+            text-lg
+            font-bold
+            text-white
+        "
+    >
+        Save {{ title }}
+    </button>
+</form>
+
+<div class="mt-10 space-y-4">
+
+    {% if title == 'Debtors' %}
+
+        {% for item in debtors %}
+
+            <div
+                class="
+                    flex
+                    items-center
+                    justify-between
+                    rounded-2xl
+                    border
+                    border-orange-400/10
+                    bg-orange-500/5
+                    p-4
+                "
+            >
+
+                <div>
+
+                    <h3 class="text-white font-semibold">
+                        {{ item.party_name }}
+                    </h3>
+
+                    <p class="text-sm text-gray-400">
+                        {{ item.mobile_number }}
+                    </p>
+
+                    <p class="text-sm text-gray-500">
+                        {{ item.address }}
+                    </p>
+
+                </div>
+
+             <div class="flex items-center gap-3">
+
+    <!-- Edit -->
+
+    <button
+        type="button"
+        onclick="openDebtorEdit({{ item.id }})"
+        class="
+            rounded-xl
+            bg-cyan-500/20
+            px-4
+            py-2
+            text-cyan-300
+            transition-all
+            duration-300
+            hover:bg-cyan-500/30
+        "
+    >
+        Edit
+    </button>
+
+    <!-- Delete -->
+
+    <a
+        href="/debts/delete-debtor/{{ item.id }}/"
+        class="
+            rounded-xl
+            bg-red-500/20
+            px-4
+            py-2
+            text-red-300
+        "
+    >
+        Delete
+    </a>
+
+</div>
+
+            </div>
+<!-- Edit Modal -->
+
+<div
+
+    id="debtorEditModal{{ item.id }}"
+    class="
+        fixed
+        inset-0
+        z-50
+        hidden
+        items-center
+        justify-center
+        bg-black/70
+        backdrop-blur-md
+        p-4
+    "
+>
+
+    <div
+        class="
+            w-full
+            max-w-2xl
+            rounded-3xl
+            border
+            border-cyan-400/10
+            bg-[#091428]
+            p-8
+        "
+    >
+
+        <form
+            method="POST"
+            action="/debts/edit-debtor/{{ item.id }}/"
+        >
+
+            {% csrf_token %}
+
+            <h2
+                class="
+                    mb-6
+                    text-3xl
+                    font-bold
+                    text-white
+                "
+            >
+                Edit Debtor
+            </h2>
+
+            <div class="space-y-5">
+
+                <input
+                    type="text"
+                    name="party_name"
+                    value="{{ item.party_name }}"
+                    class="
+                        w-full
+                        rounded-2xl
+                        border
+                        border-cyan-400/20
+                        bg-white/5
+                        px-5
+                        py-4
+                        text-white
+                        outline-none
+                    "
+                >
+
+                <input
+                    type="text"
+                    name="mobile_number"
+                    value="{{ item.mobile_number }}"
+                    class="
+                        w-full
+                        rounded-2xl
+                        border
+                        border-cyan-400/20
+                        bg-white/5
+                        px-5
+                        py-4
+                        text-white
+                        outline-none
+                    "
+                >
+
+                <input
+                    type="text"
+                    name="address"
+                    value="{{ item.address }}"
+                    class="
+                        w-full
+                        rounded-2xl
+                        border
+                        border-cyan-400/20
+                        bg-white/5
+                        px-5
+                        py-4
+                        text-white
+                        outline-none
+                    "
+                >
+
+            </div>
+
+            <div class="mt-8 flex gap-4">
+
+                <button
+                    type="submit"
+                    class="
+                        flex-1
+                        rounded-2xl
+                        bg-cyan-500
+                        py-4
+                        font-bold
+                        text-white
+                    "
+                >
+                    Update
+                </button>
+
+                <button
+                    type="button"
+                    onclick="closeDebtorEdit({{ item.id }})"
+                    class="
+                        flex-1
+                        rounded-2xl
+                        bg-red-500/20
+                        py-4
+                        font-bold
+                        text-red-300
+                    "
+                >
+                    Cancel
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+        {% endfor %}
+
+    {% endif %}
+
+
+    {% if title == 'Creditors' %}
+
+        {% for item in creditors %}
+
+            <div
+                class="
+                    flex
+                    items-center
+                    justify-between
+                    rounded-2xl
+                    border
+                    border-pink-400/10
+                    bg-pink-500/5
+                    p-4
+                "
+            >
+
+                <div>
+
+                    <h3 class="text-white font-semibold">
+                        {{ item.party_name }}
+                    </h3>
+
+                    <p class="text-sm text-gray-400">
+                        {{ item.mobile_number }}
+                    </p>
+
+                    <p class="text-sm text-gray-500">
+                        {{ item.address }}
+                    </p>
+
+                </div>
+
+   <div class="flex items-center gap-3">
+
+    <!-- Edit -->
+
+    <button
+        type="button"
+        onclick="openDebtorEdit({{ item.id }})"
+        class="
+            rounded-xl
+            bg-cyan-500/20
+            px-4
+            py-2
+            text-cyan-300
+            transition-all
+            duration-300
+            hover:bg-cyan-500/30
+        "
+    >
+        Edit
+    </button>
+
+    <!-- Delete -->
+
+    <a
+        href="/debts/delete-creditor/{{ item.id }}/"
+        class="
+            rounded-xl
+            bg-red-500/20
+            px-4
+            py-2
+            text-red-300
+        "
+    >
+        Delete
+    </a>
+
+</div>
+
+            </div>
+<!-- Edit Creditor Modal -->
+
+<div
+    id="debtorEditModal{{ item.id }}"
+    class="
+        fixed
+        inset-0
+        z-50
+        hidden
+        items-center
+        justify-center
+        bg-black/70
+        backdrop-blur-md
+        p-4
+    "
+>
+
+    <div
+        class="
+            w-full
+            max-w-2xl
+            rounded-3xl
+            border
+            border-pink-400/10
+            bg-[#091428]
+            p-8
+        "
+    >
+
+        <form
+            method="POST"
+            action="/debts/edit-creditor/{{ item.id }}/"
+        >
+
+            {% csrf_token %}
+
+            <h2
+                class="
+                    mb-6
+                    text-3xl
+                    font-bold
+                    text-white
+                "
+            >
+                Edit Creditor
+            </h2>
+
+            <div class="space-y-5">
+
+                <input
+                    type="text"
+                    name="party_name"
+                    value="{{ item.party_name }}"
+                    class="
+                        w-full
+                        rounded-2xl
+                        border
+                        border-pink-400/20
+                        bg-white/5
+                        px-5
+                        py-4
+                        text-white
+                        outline-none
+                    "
+                >
+
+                <input
+                    type="text"
+                    name="mobile_number"
+                    value="{{ item.mobile_number }}"
+                    class="
+                        w-full
+                        rounded-2xl
+                        border
+                        border-pink-400/20
+                        bg-white/5
+                        px-5
+                        py-4
+                        text-white
+                        outline-none
+                    "
+                >
+
+                <input
+                    type="text"
+                    name="address"
+                    value="{{ item.address }}"
+                    class="
+                        w-full
+                        rounded-2xl
+                        border
+                        border-pink-400/20
+                        bg-white/5
+                        px-5
+                        py-4
+                        text-white
+                        outline-none
+                    "
+                >
+
+            </div>
+
+            <div class="mt-8 flex gap-4">
+
+                <button
+                    type="submit"
+                    class="
+                        flex-1
+                        rounded-2xl
+                        bg-pink-500
+                        py-4
+                        font-bold
+                        text-white
+                    "
+                >
+                    Update
+                </button>
+
+                <button
+                    type="button"
+                    onclick="closeDebtorEdit({{ item.id }})"
+                    class="
+                        flex-1
+                        rounded-2xl
+                        bg-red-500/20
+                        py-4
+                        font-bold
+                        text-red-300
+                    "
+                >
+                    Cancel
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+        {% endfor %}
+
+    {% endif %}
+
+</div>
+</div>
+</body>
+<script>
+
+function openDebtorEdit(id) {
+
+    document
+        .getElementById(
+            `debtorEditModal${id}`
+        )
+        .classList.remove('hidden');
+
+    document
+        .getElementById(
+            `debtorEditModal${id}`
+        )
+        .classList.add('flex');
+
+}
+
+function closeDebtorEdit(id) {
+
+    document
+        .getElementById(
+            `debtorEditModal${id}`
+        )
+        .classList.add('hidden');
+
+}
+
+</script>
+</html>

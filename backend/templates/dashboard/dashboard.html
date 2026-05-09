@@ -226,83 +226,351 @@
 
             </div>
 
-            <!-- Navigation -->
+           <!-- Navigation -->
 
-            <nav class="space-y-4">
+<nav class="space-y-4">
 
-                <a
-                    href="#"
-                    class="
-                        flex
-                        items-center
-                        gap-4
-                        rounded-3xl
-                        bg-blue-500/20
-                        px-5
-                        py-4
-                        text-blue-400
-                        transition-all
-                        hover:scale-105
-                    "
-                >
-                    📊 Dashboard
-                </a>
+    <!-- Dashboard -->
 
-                <a
-                    href="#"
-                    class="
-                        flex
-                        items-center
-                        gap-4
-                        rounded-3xl
-                        px-5
-                        py-4
-                        text-gray-300
-                        transition-all
-                        hover:bg-white/10
-                        hover:scale-105
-                    "
-                >
-                    💰 Transactions
-                </a>
+    <a
+        href="/dashboard/"
+        class="
+            flex
+            items-center
+            gap-4
+            rounded-3xl
+            bg-blue-500/20
+            px-5
+            py-4
+            text-blue-400
+            transition-all
+            duration-300
+            hover:scale-[1.03]
+            hover:bg-blue-500/30
+            shadow-[0_0_30px_rgba(59,130,246,0.18)]
+        "
+    >
+        📊 Dashboard
+    </a>
 
-                <a
-                    href="#"
-                    class="
-                        flex
-                        items-center
-                        gap-4
-                        rounded-3xl
-                        px-5
-                        py-4
-                        text-gray-300
-                        transition-all
-                        hover:bg-white/10
-                        hover:scale-105
-                    "
-                >
-                    📦 Stock
-                </a>
+    <!-- Transactions Dropdown -->
 
-                <a
-                    href="#"
-                    class="
-                        flex
-                        items-center
-                        gap-4
-                        rounded-3xl
-                        px-5
-                        py-4
-                        text-gray-300
-                        transition-all
-                        hover:bg-white/10
-                        hover:scale-105
-                    "
-                >
-                    🔁 Returns
-                </a>
+    <div
+        class="
+            rounded-3xl
+            border
+            border-white/10
+            bg-white/[0.03]
+            overflow-hidden
+            backdrop-blur-2xl
+        "
+    >
 
-            </nav>
+        <!-- Dropdown Button -->
+
+       <button
+    type="button"
+
+    id="transactionToggle"
+
+    onclick="toggleTransactions()"
+
+    class="
+        w-full
+        flex
+        items-center
+        justify-between
+        px-5
+        py-4
+        text-gray-200
+        transition-all
+        duration-300
+        hover:bg-white/10
+        cursor-pointer
+    "
+>
+
+            <div class="flex items-center gap-4">
+
+                <span class="text-xl">
+                    💰
+                </span>
+
+                <span class="text-lg font-medium">
+                    Transactions
+                </span>
+
+            </div>
+
+            <span
+                id="transactionArrow"
+                class="
+                    transition-transform
+                    duration-300
+                "
+            >
+                ▼
+            </span>
+
+        </button>
+
+        <!-- Dropdown Menu -->
+
+        <div
+            id="transactionMenu"
+           class="
+    px-3
+    pb-3
+    space-y-3
+"
+style="display: none;" 
+        >
+
+            <!-- Purchase -->
+
+            <a
+                href="/dashboard/?page=purchase"
+                class="
+                    flex
+                    items-center
+                    gap-3
+                    rounded-2xl
+                    border
+                    border-cyan-400/10
+                    bg-cyan-500/10
+                    px-4
+                    py-3
+                    text-cyan-300
+                    transition-all
+                    duration-300
+                    hover:scale-[1.02]
+                    hover:bg-cyan-500/20
+                    hover:shadow-[0_0_25px_rgba(34,211,238,0.25)]
+                "
+            >
+                📥 Purchase
+            </a>
+
+            <!-- Sales -->
+
+            <a
+                href="/dashboard/?page=sales"
+                class="
+                    flex
+                    items-center
+                    gap-3
+                    rounded-2xl
+                    border
+                    border-green-400/10
+                    bg-green-500/10
+                    px-4
+                    py-3
+                    text-green-300
+                    transition-all
+                    duration-300
+                    hover:scale-[1.02]
+                    hover:bg-green-500/20
+                    hover:shadow-[0_0_25px_rgba(34,197,94,0.25)]
+                "
+            >
+                💸 Sales
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Credits Dropdown -->
+
+<div
+    class="
+        rounded-3xl
+        border
+        border-white/10
+        bg-white/[0.03]
+        overflow-hidden
+        backdrop-blur-2xl
+    "
+>
+
+    <!-- Dropdown Button -->
+
+    <button
+        type="button"
+
+        id="creditsToggle"
+
+        onclick="toggleCredits()"
+
+        class="
+            w-full
+            flex
+            items-center
+            justify-between
+            px-5
+            py-4
+            text-gray-200
+            transition-all
+            duration-300
+            hover:bg-white/10
+            cursor-pointer
+        "
+    >
+
+        <div class="flex items-center gap-4">
+
+            <span class="text-xl">
+                💳
+            </span>
+
+            <span class="text-lg font-medium">
+                Credits
+            </span>
+
+        </div>
+
+        <span
+            id="creditsArrow"
+            class="
+                transition-transform
+                duration-300
+            "
+        >
+            ▼
+        </span>
+
+    </button>
+
+    <!-- Dropdown Menu -->
+
+    <div
+        id="creditsMenu"
+        class="
+            px-3
+            pb-3
+            space-y-3
+        "
+        style="display: none;"
+    >
+
+        <!-- Debtors -->
+
+        <a
+            href="/dashboard/?page=debtors"
+            class="
+                flex
+                items-center
+                gap-3
+                rounded-2xl
+                border
+                border-orange-400/10
+                bg-orange-500/10
+                px-4
+                py-3
+                text-orange-300
+                transition-all
+                duration-300
+                hover:scale-[1.02]
+                hover:bg-orange-500/20
+                hover:shadow-[0_0_25px_rgba(251,146,60,0.25)]
+            "
+        >
+            👤 Debtors
+        </a>
+
+        <!-- Creditors -->
+
+        <a
+            href="/dashboard/?page=creditors"
+            class="
+                flex
+                items-center
+                gap-3
+                rounded-2xl
+                border
+                border-pink-400/10
+                bg-pink-500/10
+                px-4
+                py-3
+                text-pink-300
+                transition-all
+                duration-300
+                hover:scale-[1.02]
+                hover:bg-pink-500/20
+                hover:shadow-[0_0_25px_rgba(236,72,153,0.25)]
+            "
+        >
+            🏢 Creditors
+        </a>
+
+    </div>
+
+</div>
+
+    <!-- Stock -->
+
+    <a
+        href="/stock/"
+        class="
+            flex
+            items-center
+            gap-4
+            rounded-3xl
+            px-5
+            py-4
+            text-gray-300
+            transition-all
+            duration-300
+            hover:bg-white/10
+            hover:scale-[1.03]
+        "
+    >
+        📦 Stock
+    </a>
+
+    <!-- Returns -->
+
+    <a
+        href="/returns/"
+        class="
+            flex
+            items-center
+            gap-4
+            rounded-3xl
+            px-5
+            py-4
+            text-gray-300
+            transition-all
+            duration-300
+            hover:bg-white/10
+            hover:scale-[1.03]
+        "
+    >
+        🔁 Returns
+    </a>
+
+    <!-- Invoices -->
+
+    <a
+        href="/invoices/"
+        class="
+            flex
+            items-center
+            gap-4
+            rounded-3xl
+            px-5
+            py-4
+            text-gray-300
+            transition-all
+            duration-300
+            hover:bg-white/10
+            hover:scale-[1.03]
+        "
+    >
+        📜 Invoices
+    </a>
+
+</nav>
 
         </div>
 
@@ -434,6 +702,24 @@
         <!-- Content -->
 
         <section class="p-6">
+      {% if page == 'purchase' %}
+
+    {% include 'transactions/purchase.html' %}
+
+{% elif page == 'sales' %}
+
+    {% include 'transactions/sales.html' %}
+
+{% elif page == 'debtors' %}
+
+    {% include 'debts/debtors.html' %}
+
+{% elif page == 'creditors' %}
+
+    {% include 'debts/creditors.html' %}
+
+{% else %}
+
 
             <div
                 class="
@@ -670,7 +956,9 @@
                 </div>
 
             </div>
+                {% endif %}
 
+       
         </section>
 
     </main>
@@ -763,6 +1051,78 @@
         });
 
     }
+
+</script>
+<script>
+
+    console.log("Dropdown Loaded");
+
+</script>
+<script>
+
+function toggleTransactions() {
+
+    const menu = document.getElementById(
+        "transactionMenu"
+    );
+
+    const arrow = document.getElementById(
+        "transactionArrow"
+    );
+
+    if (
+        menu.style.display === "block"
+    ) {
+
+        menu.style.display = "none";
+
+        arrow.style.transform =
+            "rotate(0deg)";
+
+    }
+
+    else {
+
+        menu.style.display = "block";
+
+        arrow.style.transform =
+            "rotate(180deg)";
+
+    }
+
+}
+
+function toggleCredits() {
+
+    const menu = document.getElementById(
+        "creditsMenu"
+    );
+
+    const arrow = document.getElementById(
+        "creditsArrow"
+    );
+
+    if (
+        menu.style.display === "block"
+    ) {
+
+        menu.style.display = "none";
+
+        arrow.style.transform =
+            "rotate(0deg)";
+
+    }
+
+    else {
+
+        menu.style.display = "block";
+
+        arrow.style.transform =
+            "rotate(180deg)";
+
+    }
+
+}
 
 </script>
 </body>
