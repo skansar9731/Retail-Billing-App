@@ -93,14 +93,16 @@
     class="
         font-poppins
         relative
-        flex
         min-h-screen
-        items-center
-        justify-center
-        overflow-hidden
         bg-[#020617]
-        px-4
         text-white
+        overflow-x-hidden
+        flex
+        items-start
+        justify-center
+        px-4
+        py-8
+        sm:py-10
     "
 >
 
@@ -172,21 +174,23 @@
     <!-- Login Card -->
 
     <div
-        class="
-            relative
-            z-10
-            w-full
-            max-w-md
-            rounded-[32px]
-            border
-            border-white/10
-            bg-white/5
-            p-8
-            backdrop-blur-2xl
-            shadow-[0_0_80px_rgba(59,130,246,0.25)]
-        "
-    >
-
+    class="
+        relative
+        z-10
+        w-[400px]
+        max-w-lg
+        rounded-[32px]
+        border
+        border-white/10
+        bg-white/5
+        p-6
+        sm:p-8
+        backdrop-blur-2xl
+        shadow-[0_0_80px_rgba(59,130,246,0.25)]
+        mx-4
+        my-10
+    "
+>
         <!-- Logo -->
 
         <div class="mb-10 text-center">
@@ -208,17 +212,17 @@
                     animate-bounce
                 "
             >
-                🛒
+                <img class="rounded-[32px]" src="/static/assets/icons/ww-512.png" alt="Logo">
             </div>
 
             <h1
                 class="
                     mt-6
-                    text-4xl
+                    text-2xl
                     font-bold
                 "
             >
-                Retail Billing
+                Warranty Wala's Retail Billing
             </h1>
 
             <p
