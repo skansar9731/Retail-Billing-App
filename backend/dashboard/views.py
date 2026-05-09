@@ -9,6 +9,8 @@ from debts.models import Creditor
 
 from stock.models import Stock
 
+from invoices.models import Invoice
+
 
 @login_required(login_url='/login/')
 def dashboard_view(request):
@@ -30,6 +32,14 @@ def dashboard_view(request):
         '-id'
     )
 
+    purchase_invoices = Invoice.objects.filter(
+        invoice_type='purchase'
+    ).order_by('-id')
+
+    sales_invoices = Invoice.objects.filter(
+        invoice_type='sales'
+    ).order_by('-id')
+
     total_products = stocks.count()
 
     total_quantity = sum(
@@ -47,9 +57,17 @@ def dashboard_view(request):
 
         'stocks': stocks,
 
-        'total_products': total_products,
+        'purchase_invoices':
+            purchase_invoices,
 
-        'total_quantity': total_quantity
+        'sales_invoices':
+            sales_invoices,
+
+        'total_products':
+            total_products,
+
+        'total_quantity':
+            total_quantity
 
     }
 

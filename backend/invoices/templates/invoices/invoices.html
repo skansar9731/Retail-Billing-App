@@ -1,0 +1,165 @@
+<div
+    class="
+        rounded-[32px]
+        bg-gradient-to-br
+        from-[#091428]
+        via-[#101d3b]
+        to-[#1a1040]
+        p-8
+    "
+>
+
+    <h2
+        class="
+            mb-8
+            text-4xl
+            font-bold
+            text-white
+        "
+    >
+        Invoices
+    </h2>
+
+    <!-- Purchase -->
+
+    <div class="mb-10">
+
+        <h3
+            class="
+                mb-5
+                text-2xl
+                font-bold
+                text-cyan-300
+            "
+        >
+            Purchase Invoices
+        </h3>
+
+        <div class="space-y-4">
+
+            {% for item in purchase_invoices %}
+
+            <div
+                class="
+                    flex
+                    items-center
+                    justify-between
+                    rounded-2xl
+                    border
+                    border-cyan-400/10
+                    bg-white/5
+                    p-5
+                "
+            >
+
+                <div>
+
+                    <h4
+                        class="
+                            text-xl
+                            font-semibold
+                            text-white
+                        "
+                    >
+                        {{ item.party_name }}
+                    </h4>
+
+                    <p class="text-cyan-200/70">
+                        {{ item.invoice_number }}
+                    </p>
+
+                </div>
+
+                <button
+                    class="
+                        rounded-2xl
+                        bg-cyan-500
+                        px-5
+                        py-3
+                        font-semibold
+                        text-white
+                    "
+                >
+                    View PDF
+                </button>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <!-- Sales -->
+
+    <div>
+
+        <h3
+            class="
+                mb-5
+                text-2xl
+                font-bold
+                text-pink-300
+            "
+        >
+            Sales Invoices
+        </h3>
+
+        <div class="space-y-4">
+
+            {% for item in sales_invoices %}
+
+            <div
+                class="
+                    flex
+                    items-center
+                    justify-between
+                    rounded-2xl
+                    border
+                    border-pink-400/10
+                    bg-white/5
+                    p-5
+                "
+            >
+
+                <div>
+
+                    <h4
+                        class="
+                            text-xl
+                            font-semibold
+                            text-white
+                        "
+                    >
+                        {{ item.party_name }}
+                    </h4>
+
+                    <p class="text-pink-200/70">
+                        {{ item.invoice_number }}
+                    </p>
+
+                </div>
+
+                <button
+                    class="
+                        rounded-2xl
+                        bg-pink-500
+                        px-5
+                        py-3
+                        font-semibold
+                        text-white
+                    "
+                >
+                    View PDF
+                </button>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</div>

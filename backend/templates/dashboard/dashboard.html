@@ -551,12 +551,32 @@ style="display: none;"
 
     <!-- Invoices -->
 
-    <a
-        href="/invoices/"
+    <!-- Invoices Dropdown -->
+
+<div
+    class="
+        rounded-3xl
+        border
+        border-white/10
+        bg-white/5
+        overflow-hidden
+    "
+>
+
+    <!-- Main Button -->
+
+    <button
+         type="button"
+
+    id="invoiceToggle"
+
+    onclick="toggleInvoices()"
+
         class="
+            w-full
             flex
             items-center
-            gap-4
+            justify-between
             rounded-3xl
             px-5
             py-4
@@ -564,11 +584,126 @@ style="display: none;"
             transition-all
             duration-300
             hover:bg-white/10
-            hover:scale-[1.03]
         "
     >
-        📜 Invoices
-    </a>
+
+        <div
+            class="
+                flex
+                items-center
+                gap-4
+            "
+        >
+            📜 Invoices
+        </div>
+
+        <span
+            id="invoiceArrow"
+            class="
+                transition-all
+                duration-300
+            "
+        >
+            ▼
+        </span>
+
+    </button>
+
+    <!-- Dropdown Menu -->
+
+   <div
+    id="invoiceMenu"
+    class="
+        px-4
+        pb-4
+        space-y-3
+    "
+    style="display: none;"
+>
+
+        <!-- Purchase -->
+
+        <a
+            href="/dashboard/?page=purchase-invoices"
+
+            class="
+                block
+                rounded-2xl
+                bg-cyan-500/10
+                px-4
+                py-3
+                text-cyan-300
+                transition-all
+                duration-300
+                hover:bg-cyan-500/20
+            "
+        >
+            📥 Purchase Invoices
+        </a>
+
+        <!-- Sales -->
+
+        <a
+            href="/dashboard/?page=sales-invoices"
+
+            class="
+                block
+                rounded-2xl
+                bg-pink-500/10
+                px-4
+                py-3
+                text-pink-300
+                transition-all
+                duration-300
+                hover:bg-pink-500/20
+            "
+        >
+            📤 Sales Invoices
+        </a>
+
+        <!-- Purchase Return -->
+
+        <a
+            href="/dashboard/?page=purchase-return"
+
+            class="
+                block
+                rounded-2xl
+                bg-orange-500/10
+                px-4
+                py-3
+                text-orange-300
+                transition-all
+                duration-300
+                hover:bg-orange-500/20
+            "
+        >
+            🔁 Purchase Return
+        </a>
+
+        <!-- Sales Return -->
+
+        <a
+            href="/dashboard/?page=sales-return"
+
+            class="
+                block
+                rounded-2xl
+                bg-purple-500/10
+                px-4
+                py-3
+                text-purple-300
+                transition-all
+                duration-300
+                hover:bg-purple-500/20
+            "
+        >
+            🔄 Sales Return
+        </a>
+
+    </div>
+
+</div>
 
 </nav>
 
@@ -721,6 +856,25 @@ style="display: none;"
     {% elif page == 'stock' %}
 
     {% include 'stock/stock.html' %}
+    {% elif page == 'invoices' %}
+
+    {% include 'invoices/invoices.html' %}
+
+    {% elif page == 'purchase-invoices' %}
+
+    {% include 'invoices/purchase_invoices.html' %}
+
+{% elif page == 'sales-invoices' %}
+
+    {% include 'invoices/sales_invoices.html' %}
+
+{% elif page == 'purchase-return' %}
+
+    {% include 'invoices/purchase_return.html' %}
+
+{% elif page == 'sales-return' %}
+
+    {% include 'invoices/sales_return.html' %}
 
 {% else %}
 
@@ -1127,7 +1281,37 @@ function toggleCredits() {
     }
 
 }
+function toggleInvoices() {
 
+    const menu = document.getElementById(
+        "invoiceMenu"
+    );
+
+    const arrow = document.getElementById(
+        "invoiceArrow"
+    );
+
+    if (
+        menu.style.display === "block"
+    ) {
+
+        menu.style.display = "none";
+
+        arrow.style.transform =
+            "rotate(0deg)";
+
+    }
+
+    else {
+
+        menu.style.display = "block";
+
+        arrow.style.transform =
+            "rotate(180deg)";
+
+    }
+
+}
 </script>
 </body>
 

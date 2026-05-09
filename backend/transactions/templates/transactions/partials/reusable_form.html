@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>reusable-form</title>
 </head>
+
 <body>
-    <div
-    class="
+    <div class="
         relative
         rounded-[32px]
         border
@@ -21,13 +22,11 @@
         shadow-[0_0_50px_rgba(34,211,238,0.12)]
         backdrop-blur-3xl
         overflow-hidden
-    "
->
+    ">
 
-    <!-- Neon Glow -->
+        <!-- Neon Glow -->
 
-    <div
-        class="
+        <div class="
             absolute
             -top-20
             right-0
@@ -36,11 +35,9 @@
             rounded-full
             bg-cyan-500/10
             blur-3xl
-        "
-    ></div>
+        "></div>
 
-    <div
-        class="
+        <div class="
             absolute
             bottom-0
             left-0
@@ -49,50 +46,42 @@
             rounded-full
             bg-purple-600/10
             blur-3xl
-        "
-    ></div>
+        "></div>
 
-    <!-- Header -->
+        <!-- Header -->
 
-    <div
-        class="
+        <div class="
             relative
             z-10
             mb-8
             flex
             items-center
             justify-between
-        "
-    >
+        ">
 
-        <div>
+            <div>
 
-            <h2
-                class="
+                <h2 class="
                     text-3xl
                     font-bold
                     text-white
-                "
-            >
-                {{ title }}
-            </h2>
+                ">
+                    {{ title }}
+                </h2>
 
-            <p
-                class="
+                <p class="
                     mt-2
                     text-sm
                     text-cyan-200/70
-                "
-            >
-                Manage your electronics stock professionally
-            </p>
+                ">
+                    Manage your electronics stock professionally
+                </p>
 
-        </div>
+            </div>
 
-        <!-- Icon -->
+            <!-- Icon -->
 
-        <div
-            class="
+            <div class="
                 flex
                 h-16
                 w-16
@@ -104,38 +93,30 @@
                 to-blue-600
                 text-3xl
                 shadow-[0_0_30px_rgba(34,211,238,0.45)]
-            "
-        >
-            📦
+            ">
+                📦
+            </div>
+
         </div>
 
-    </div>
+        <!-- Form -->
 
-    <!-- Form -->
-
-    <form
-        method="POST"
-        class="
+        <form method="POST" class="
             relative
             z-10
             grid
             grid-cols-1
             gap-6
             md:grid-cols-2
-        "
-    >
+        ">
 
-        {% csrf_token %}
+            {% csrf_token %}
 
-        <!-- Party Name -->
+            <!-- Party Name -->
 
-<div class="relative group">
+            <div class="relative group">
 
-    <select
-        name="party"
-        required
-
-        class="
+                <select name="party" required class="
             peer
             w-full
             rounded-2xl
@@ -153,45 +134,37 @@
             focus:border-cyan-300
             focus:shadow-[0_0_20px_rgba(34,211,238,0.45)]
             focus:bg-white/10
-        "
-    >
+        ">
 
-        <option value="" disabled selected hidden></option>
+                    <option value="" disabled selected hidden></option>
 
-        {% if title == 'Purchase Entry' %}
+                    {% if title == 'Purchase Entry' %}
 
-            {% for item in creditors %}
+                    {% for item in creditors %}
 
-                <option
-                    value="{{ item.party_name }}"
-                    class="bg-[#0b1730] text-white"
-                >
-                    {{ item.party_name }}
-                </option>
+                    <option value="{{ item.party_name }}" class="bg-[#0b1730] text-white">
+                        {{ item.party_name }}
+                    </option>
 
-            {% endfor %}
+                    {% endfor %}
 
-        {% endif %}
+                    {% endif %}
 
-        {% if title == 'Sales Entry' %}
+                    {% if title == 'Sales Entry' %}
 
-            {% for item in debtors %}
+                    {% for item in debtors %}
 
-                <option
-                    value="{{ item.party_name }}"
-                    class="bg-[#0b1730] text-white"
-                >
-                    {{ item.party_name }}
-                </option>
+                    <option value="{{ item.party_name }}" class="bg-[#0b1730] text-white">
+                        {{ item.party_name }}
+                    </option>
 
-            {% endfor %}
+                    {% endfor %}
 
-        {% endif %}
+                    {% endif %}
 
-    </select>
+                </select>
 
-    <label
-        class="
+                <label class="
             absolute
             left-5
             top-1/2
@@ -208,30 +181,21 @@
             peer-valid:top-3
             peer-valid:text-xs
             peer-valid:text-cyan-300
-        "
-    >
-        {% if title == 'Purchase Entry' %}
-            Supplier Name
-        {% else %}
-            Customer Name
-        {% endif %}
-    </label>
+        ">
+                    {% if title == 'Purchase Entry' %}
+                    Supplier Name
+                    {% else %}
+                    Customer Name
+                    {% endif %}
+                </label>
 
-</div>
+            </div>
 
-<!-- Transaction Date -->
+            <!-- Transaction Date -->
 
-<div class="relative group">
+            <div class="relative group">
 
-    <input
-        type="date"
-        name="transaction_date"
-
-        value="{% now 'Y-m-d' %}"
-
-        required
-
-        class="
+                <input type="date" name="transaction_date" value="{% now 'Y-m-d' %}" required class="
             peer
             w-full
             rounded-2xl
@@ -248,38 +212,28 @@
             focus:border-cyan-300
             focus:shadow-[0_0_20px_rgba(34,211,238,0.45)]
             focus:bg-white/10
-        "
-    >
+        ">
 
-    <label
-        class="
+                <label class="
             absolute
             left-5
             top-3
             text-xs
             text-cyan-300
-        "
-    >
-        Transaction Date
-    </label>
+        ">
+                    Transaction Date
+                </label>
 
-</div>
+            </div>
 
-        <!-- Product Name -->
+            <!-- Product Name -->
 
-        <!-- Product Name -->
+            <!-- Product Name -->
 
-<div class="relative group">
+            <div class="relative group">
 
-    <input
-        type="text"
-        name="product_name"
-        id="productSearch"
-        placeholder=" "
-        autocomplete="off"
-        required
-
-        class="
+                <input type="text" name="product_name" id="productSearch" placeholder=" " autocomplete="off" required
+                    class="
             peer
             w-full
             rounded-2xl
@@ -299,11 +253,9 @@
             focus:shadow-[0_0_20px_rgba(34,211,238,0.45)]
 
             focus:bg-white/10
-        "
-    >
+        ">
 
-    <label
-        class="
+                <label class="
             absolute
             left-5
             top-1/2
@@ -320,16 +272,13 @@
             peer-valid:top-3
             peer-valid:text-xs
             peer-valid:text-cyan-300
-        "
-    >
-        Product Name
-    </label>
+        ">
+                    Product Name
+                </label>
 
-    <!-- Suggestions -->
+                <!-- Suggestions -->
 
-    <div
-        id="productSuggestions"
-        class="
+                <div id="productSuggestions" class="
             absolute
             left-0
             top-full
@@ -344,13 +293,11 @@
             border-cyan-400/20
             bg-[#091428]
             shadow-[0_0_25px_rgba(34,211,238,0.18)]
-        "
-    >
+        ">
 
-        {% for item in stocks %}
+                    {% for item in stocks %}
 
-            <div
-                class="
+                    <div class="
                     cursor-pointer
                     border-b
                     border-cyan-400/10
@@ -359,69 +306,55 @@
                     transition-all
                     duration-300
                     hover:bg-cyan-500/10
-                "
-
-               onclick="
+                " onclick="
     selectProduct(
         '{{ item.product_name }}',
         '{{ item.unit }}',
         '{{ item.purchase_price }}',
         '{{ item.selling_price }}'
     )
-"
-            >
+">
 
-                <div
-                    class="
+                        <div class="
                         flex
                         items-center
                         justify-between
-                    "
-                >
+                    ">
 
-                    <span
-                        class="
+                            <span class="
                             font-medium
                             text-white
-                        "
-                    >
-                        {{ item.product_name }}
-                    </span>
+                        ">
+                                {{ item.product_name }}
+                            </span>
 
-                    <span
-                        class="
+                            <span class="
                             rounded-xl
                             bg-cyan-500/10
                             px-3
                             py-1
                             text-xs
                             text-cyan-300
-                        "
-                    >
-                        Qty :
-                        {{ item.quantity }}
-                    </span>
+                        ">
+                                Qty :
+                                {{ item.quantity }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
 
                 </div>
 
             </div>
 
-        {% endfor %}
+            <!-- Unit Type -->
 
-    </div>
+            <div class="relative group">
 
-</div>
-
-               <!-- Unit Type -->
-
-<div class="relative group">
-
-    <select
-        name="unit"
-            id="unitType"
-        required
-
-        class="
+                <select name="unit" id="unitType" required class="
             peer
             w-full
             rounded-2xl
@@ -445,45 +378,31 @@
             focus:shadow-[0_0_20px_rgba(34,211,238,0.45)]
 
             focus:bg-white/10
-        "
-    >
+        ">
 
-        <option value="" disabled selected hidden></option>
+                    <option value="" disabled selected hidden></option>
 
-        <option
-    value="Pieces"
-    class="bg-[#0b1730] text-white"
->
-    Pieces
-</option>
+                    <option value="Pieces" class="bg-[#0b1730] text-white">
+                        Pieces
+                    </option>
 
-<option
-    value="Feet"
-    class="bg-[#0b1730] text-white"
->
-    Feet
-</option>
+                    <option value="Feet" class="bg-[#0b1730] text-white">
+                        Feet
+                    </option>
 
-<option
-    value="Meter"
-    class="bg-[#0b1730] text-white"
->
-    Meter
-</option>
+                    <option value="Meter" class="bg-[#0b1730] text-white">
+                        Meter
+                    </option>
 
-<option
-    value="Roll"
-    class="bg-[#0b1730] text-white"
->
-    Roll
-</option>
+                    <option value="Roll" class="bg-[#0b1730] text-white">
+                        Roll
+                    </option>
 
-    </select>
+                </select>
 
-    <!-- Floating Label -->
+                <!-- Floating Label -->
 
-    <label
-        class="
+                <label class="
             absolute
             left-5
             top-1/2
@@ -503,15 +422,13 @@
             peer-valid:top-3
             peer-valid:text-xs
             peer-valid:text-cyan-300
-        "
-    >
-        Unit Type
-    </label>
+        ">
+                    Unit Type
+                </label>
 
-    <!-- Custom Arrow -->
+                <!-- Custom Arrow -->
 
-    <div
-        class="
+                <div class="
             pointer-events-none
             absolute
             right-5
@@ -519,24 +436,17 @@
             -translate-y-1/2
             text-cyan-300
             text-sm
-        "
-    >
-        ▼
-    </div>
+        ">
+                    ▼
+                </div>
 
-</div> 
+            </div>
 
-       <!-- Quantity -->
+            <!-- Quantity -->
 
-        <div class="relative group">
+            <div class="relative group">
 
-            <input
-                type="number"
-                name="quantity"
-                placeholder=" "
-                required
-
-                class="
+                <input type="number" name="quantity" placeholder=" " required class="
                     peer
                     w-full
                     rounded-2xl
@@ -556,11 +466,9 @@
                     focus:shadow-[0_0_20px_rgba(34,211,238,0.45)]
 
                     focus:bg-white/10
-                "
-            >
+                ">
 
-            <label
-                class="
+                <label class="
                     absolute
                     left-5
                     top-1/2
@@ -577,26 +485,17 @@
                     peer-valid:top-3
                     peer-valid:text-xs
                     peer-valid:text-cyan-300
-                "
-            >
-                Quantity
-            </label>
+                ">
+                    Quantity
+                </label>
 
-        </div>
+            </div>
 
-         <!-- Selling Price -->
-{% if title == 'Sales Entry' %}
-        <div class="relative group">
+            <!-- Selling Price -->
+            {% if title == 'Sales Entry' %}
+            <div class="relative group">
 
-            <input
-                type="number"
-                step="0.01"
-                id="sellingPrice"
-                name="selling_price"
-                placeholder=" "
-                required
-
-                class="
+                <input type="number" step="0.01" id="sellingPrice" name="selling_price" placeholder=" " required class="
                     peer
                     w-full
                     rounded-2xl
@@ -616,11 +515,9 @@
                     focus:shadow-[0_0_20px_rgba(34,211,238,0.45)]
 
                     focus:bg-white/10
-                "
-            >
+                ">
 
-            <label
-                class="
+                <label class="
                     absolute
                     left-5
                     top-1/2
@@ -637,28 +534,20 @@
                     peer-valid:top-3
                     peer-valid:text-xs
                     peer-valid:text-cyan-300
-                "
-            >
-                Selling Price
-            </label>
+                ">
+                    Selling Price
+                </label>
 
-        </div>
-        {% endif %}
-       
+            </div>
+            {% endif %}
 
-        <!-- Purchase Price -->
 
-        <div class="relative group">
+            <!-- Purchase Price -->
 
-            <input
-                type="number"
-                step="0.01"
-                id="purchasePrice"
-                name="purchase_price"
-                placeholder=" "
-                required
+            <div class="relative group">
 
-                class="
+                <input type="number" step="0.01" id="purchasePrice" name="purchase_price" placeholder=" " required
+                    readonly class="
                     peer
                     w-full
                     rounded-2xl
@@ -678,43 +567,35 @@
                     focus:shadow-[0_0_20px_rgba(34,211,238,0.45)]
 
                     focus:bg-white/10
-                "
-            >
+                ">
 
-            <label
-                class="
-                    absolute
-                    left-5
-                    top-1/2
-                    -translate-y-1/2
-                    text-gray-400
-                    transition-all
-                    duration-300
-                    pointer-events-none
+                <label class="
+        absolute
+        left-5
+        top-3
+        -translate-y-1/2
+        text-gray-400
+        transition-all
+        duration-300
+        pointer-events-none
 
-                    peer-focus:top-3
-                    peer-focus:text-xs
-                    peer-focus:text-cyan-300
+        peer-focus:top-3
+        peer-focus:text-xs
+        peer-focus:text-cyan-300
 
-                    peer-valid:top-3
-                    peer-valid:text-xs
-                    peer-valid:text-cyan-300
-                "
-            >
-                Purchase Price
-            </label>
+        peer-valid:top-3
+        peer-valid:text-xs
+        peer-valid:text-cyan-300
+    ">
+                    Purchase Price
+                </label>
 
-        </div>
-<!-- Total Amount -->
+            </div>
+            <!-- Total Amount -->
 
-<div class="relative group">
+            <div class="relative group">
 
-    <input
-        type="text"
-        id="totalAmount"
-        readonly
-
-        class="
+                <input type="text" id="totalAmount" readonly class="
             peer
             w-full
             rounded-2xl
@@ -728,40 +609,29 @@
             outline-none
             transition-all
             duration-300
-        "
-    >
+        ">
 
-    <label
-        class="
+                <label class="
             absolute
             left-5
             top-3
             text-xs
             text-green-300
-        "
-    >
-        Total Amount
-    </label>
+        ">
+                    Total Amount
+                </label>
 
-</div>
-    <!-- Unit -->
-
+            </div>
+            <!-- Unit -->
 
 
- <!-- Net Profit -->
-{% if title == 'Sales Entry' %}
 
-        <div class="relative group">
+            <!-- Net Profit -->
+            {% if title == 'Sales Entry' %}
 
-            <input
-                type="text"
-                name="net_profit"
-id="netProfit"
-readonly
-                placeholder=" "
-                required
+            <div class="relative group">
 
-                class="
+                <input type="text" name="net_profit" id="netProfit" readonly placeholder=" " required class="
                     peer
                     w-full
                     rounded-2xl
@@ -781,42 +651,36 @@ readonly
                     focus:shadow-[0_0_20px_rgba(34,211,238,0.45)]
 
                     focus:bg-white/10
-                "
-            >
+                ">
 
-            <label
-                class="
-                    absolute
-                    left-5
-                    top-1/2
-                    -translate-y-1/2
-                    text-gray-400
-                    transition-all
-                    duration-300
-                    pointer-events-none
+                <label class="
+        absolute
+        left-5
+        top-3
+        -translate-y-1/2
+        text-gray-400
+        transition-all
+        duration-300
+        pointer-events-none
 
-                    peer-focus:top-3
-                    peer-focus:text-xs
-                    peer-focus:text-cyan-300
+        peer-focus:top-3
+        peer-focus:text-xs
+        peer-focus:text-cyan-300
 
-                    peer-valid:top-3
-                    peer-valid:text-xs
-                    peer-valid:text-cyan-300
-                "
-            >
-                Net Profit on this Product
-            </label>
+        peer-valid:top-3
+        peer-valid:text-xs
+        peer-valid:text-cyan-300
+    ">
+                    Net Profit on this Product
+                </label>
 
-        </div>
-{% endif %}
-        <!-- Submit Button -->
+            </div>
+            {% endif %}
+            <!-- Submit Button -->
 
-        <div class="md:col-span-2">
+            <div class="md:col-span-2">
 
-            <button
-                type="submit"
-
-                class="
+                <button type="submit" class="
                     w-full
                     rounded-2xl
                     bg-gradient-to-r
@@ -835,324 +699,324 @@ readonly
                     hover:scale-[1.01]
 
                     hover:shadow-[0_0_45px_rgba(34,211,238,0.65)]
-                "
-            >
-                Save Transaction
-            </button>
+                ">
+                    Save Transaction
+                </button>
 
-        </div>
+            </div>
 
-    </form>
+        </form>
 
-</div>
-<script>
+    </div>
+    <script>
 
-    const quantityInput =
-        document.querySelector(
-            'input[name="quantity"]'
-        );
+        const quantityInput =
+            document.querySelector(
+                'input[name="quantity"]'
+            );
 
-    const purchaseInput =
-        document.querySelector(
-            'input[id="purchasePrice"]'
-        );
+        const purchaseInput =
+            document.querySelector(
+                'input[id="purchasePrice"]'
+            );
 
-    const totalInput =
-        document.getElementById(
-            'totalAmount'
-        );
+        const totalInput =
+            document.getElementById(
+                'totalAmount'
+            );
 
-   function calculateTotal() {
+        function calculateTotal() {
 
-    const quantity =
-        parseFloat(
-            quantityInput.value
-        ) || 0;
+            const quantity =
+                parseFloat(
+                    quantityInput.value
+                ) || 0;
 
-    // Sales Price
+            // Sales Price
 
-    const sellingInput =
-        document.getElementById(
-            'sellingPrice'
-        );
+            const sellingInput =
+                document.getElementById(
+                    'sellingPrice'
+                );
 
-    let selling = 0;
+            let selling = 0;
 
-    if (sellingInput) {
+            if (sellingInput) {
 
-        selling =
-            parseFloat(
-                sellingInput.value
-            ) || 0;
-
-    }
-
-    // Purchase Entry
-
-    else {
-
-        selling =
-            parseFloat(
-                purchaseInput.value
-            ) || 0;
-
-    }
-
-    // Final Total
-
-    const total =
-        quantity * selling;
-
-    totalInput.value =
-        '₹ ' + total.toFixed(2);
-
-}
-
-    quantityInput.addEventListener(
-    'input',
-    () => {
-
-        calculateTotal();
-
-        updateProfit();
-
-    }
-);
-
-   purchaseInput.addEventListener(
-    'input',
-    () => {
-
-        calculateTotal();
-
-        updateProfit();
-
-    }
-);
-
-    const sellingPriceInput =
-    document.getElementById(
-        'sellingPrice'
-    );
-
-if (sellingPriceInput) {
-
-    sellingPriceInput.addEventListener(
-    'input',
-    () => {
-
-        calculateTotal();
-
-        updateProfit();
-
-    }
-);
-
-}
-
-    const productSearch =
-        document.getElementById(
-            'productSearch'
-        );
-
-    const productSuggestions =
-        document.getElementById(
-            'productSuggestions'
-        );
-
-    const suggestionItems =
-        productSuggestions.querySelectorAll(
-            'div[onclick]'
-        );
-
-    // Open Suggestions
-
-    productSearch.addEventListener(
-        'focus',
-        () => {
-
-            productSuggestions
-                .classList
-                .remove('hidden');
-
-        }
-    );
-
-    // Search Filter
-
-    productSearch.addEventListener(
-        'keyup',
-        () => {
-
-            const value =
-                productSearch.value
-                .toLowerCase();
-
-            suggestionItems.forEach((item) => {
-
-                const text =
-                    item.innerText
-                    .toLowerCase();
-
-                item.style.display =
-                    text.includes(value)
-
-                    ? 'block'
-
-                    : 'none';
-
-            });
-
-        }
-    );
-
-    // Select Product
-
-  function selectProduct(
-    name,
-    unit,
-    purchase,
-    selling
-) {
-
-    // Product Name
-
-    productSearch.value = name;
-
-    // Unit
-
-    document.getElementById(
-        'unitType'
-    ).value = unit;
-
-    // Purchase Price
-
-    document.getElementById(
-        'purchasePrice'
-    ).value = purchase;
-
-    // Selling Price
-
-    const sellingInput =
-        document.getElementById(
-            'sellingPrice'
-        );
-
-    if (sellingInput) {
-
-        sellingInput.value = selling;
-
-    }
-
-    // Net Profit
-
-    const netProfitInput =
-        document.getElementById(
-            'netProfit'
-        );
-
-    if (
-        netProfitInput &&
-        selling
-    ) {
-
-        const quantity =
-    parseFloat(
-        quantityInput.value
-    ) || 0;
-
-const singleProfit =
-    parseFloat(selling)
-    -
-    parseFloat(purchase);
-
-const totalProfit =
-    singleProfit * quantity;
-
-netProfitInput.value =
-    '₹ ' + totalProfit.toFixed(2);
-
-    }
-
-    // Close Suggestions
-
-    productSuggestions
-        .classList
-        .add('hidden');
-
-    // Recalculate Total
-
-    calculateTotal();
-
-}
-calculateTotal();
-    // Outside Click Close
-
-    document.addEventListener(
-        'click',
-        (e) => {
-
-            if (
-                !productSearch.contains(e.target)
-                &&
-                !productSuggestions.contains(e.target)
-            ) {
-
-                productSuggestions
-                    .classList
-                    .add('hidden');
+                selling =
+                    parseFloat(
+                        sellingInput.value
+                    ) || 0;
 
             }
 
+            // Purchase Entry
+
+            else {
+
+                selling =
+                    parseFloat(
+                        purchaseInput.value
+                    ) || 0;
+
+            }
+
+            // Final Total
+
+            const total =
+                quantity * selling;
+
+            totalInput.value =
+                '₹ ' + total.toFixed(2);
+
         }
-    );
 
-function updateProfit() {
+        quantityInput.addEventListener(
+            'input',
+            () => {
 
-    const sellingInput =
-        document.getElementById(
-            'sellingPrice'
+                calculateTotal();
+
+                updateProfit();
+
+            }
         );
 
-    const netProfitInput =
-        document.getElementById(
-            'netProfit'
+        purchaseInput.addEventListener(
+            'input',
+            () => {
+
+                calculateTotal();
+
+                updateProfit();
+
+            }
         );
 
-    if (
-        !sellingInput ||
-        !netProfitInput
-    ) {
-        return;
-    }
+        const sellingPriceInput =
+            document.getElementById(
+                'sellingPrice'
+            );
 
-    const quantity =
-        parseFloat(
-            quantityInput.value
-        ) || 0;
+        if (sellingPriceInput) {
 
-    const selling =
-        parseFloat(
-            sellingInput.value
-        ) || 0;
+            sellingPriceInput.addEventListener(
+                'input',
+                () => {
 
-    const purchase =
-        parseFloat(
-            purchaseInput.value
-        ) || 0;
+                    calculateTotal();
 
-    const totalProfit =
-        (
-            selling - purchase
-        ) * quantity;
+                    updateProfit();
 
-    netProfitInput.value =
-        '₹ ' +
-        totalProfit.toFixed(2);
+                }
+            );
 
-}
-calculateTotal();
-updateProfit();
-</script>
+        }
+
+        const productSearch =
+            document.getElementById(
+                'productSearch'
+            );
+
+        const productSuggestions =
+            document.getElementById(
+                'productSuggestions'
+            );
+
+        const suggestionItems =
+            productSuggestions.querySelectorAll(
+                'div[onclick]'
+            );
+
+        // Open Suggestions
+
+        productSearch.addEventListener(
+            'focus',
+            () => {
+
+                productSuggestions
+                    .classList
+                    .remove('hidden');
+
+            }
+        );
+
+        // Search Filter
+
+        productSearch.addEventListener(
+            'keyup',
+            () => {
+
+                const value =
+                    productSearch.value
+                        .toLowerCase();
+
+                suggestionItems.forEach((item) => {
+
+                    const text =
+                        item.innerText
+                            .toLowerCase();
+
+                    item.style.display =
+                        text.includes(value)
+
+                            ? 'block'
+
+                            : 'none';
+
+                });
+
+            }
+        );
+
+        // Select Product
+
+        function selectProduct(
+            name,
+            unit,
+            purchase,
+            selling
+        ) {
+
+            // Product Name
+
+            productSearch.value = name;
+
+            // Unit
+
+            document.getElementById(
+                'unitType'
+            ).value = unit;
+
+            // Purchase Price
+
+            document.getElementById(
+                'purchasePrice'
+            ).value = purchase;
+
+            // Selling Price
+
+            const sellingInput =
+                document.getElementById(
+                    'sellingPrice'
+                );
+
+            if (sellingInput) {
+
+                sellingInput.value = selling;
+
+            }
+
+            // Net Profit
+
+            const netProfitInput =
+                document.getElementById(
+                    'netProfit'
+                );
+
+            if (
+                netProfitInput &&
+                selling
+            ) {
+
+                const quantity =
+                    parseFloat(
+                        quantityInput.value
+                    ) || 0;
+
+                const singleProfit =
+                    parseFloat(selling)
+                    -
+                    parseFloat(purchase);
+
+                const totalProfit =
+                    singleProfit * quantity;
+
+                netProfitInput.value =
+                    '₹ ' + totalProfit.toFixed(2);
+
+            }
+
+            // Close Suggestions
+
+            productSuggestions
+                .classList
+                .add('hidden');
+
+            // Recalculate Total
+
+            calculateTotal();
+
+        }
+        calculateTotal();
+        // Outside Click Close
+
+        document.addEventListener(
+            'click',
+            (e) => {
+
+                if (
+                    !productSearch.contains(e.target)
+                    &&
+                    !productSuggestions.contains(e.target)
+                ) {
+
+                    productSuggestions
+                        .classList
+                        .add('hidden');
+
+                }
+
+            }
+        );
+
+        function updateProfit() {
+
+            const sellingInput =
+                document.getElementById(
+                    'sellingPrice'
+                );
+
+            const netProfitInput =
+                document.getElementById(
+                    'netProfit'
+                );
+
+            if (
+                !sellingInput ||
+                !netProfitInput
+            ) {
+                return;
+            }
+
+            const quantity =
+                parseFloat(
+                    quantityInput.value
+                ) || 0;
+
+            const selling =
+                parseFloat(
+                    sellingInput.value
+                ) || 0;
+
+            const purchase =
+                parseFloat(
+                    purchaseInput.value
+                ) || 0;
+
+            const totalProfit =
+                (
+                    selling - purchase
+                ) * quantity;
+
+            netProfitInput.value =
+                '₹ ' +
+                totalProfit.toFixed(2);
+
+        }
+        calculateTotal();
+        updateProfit();
+    </script>
 </body>
+
 </html>

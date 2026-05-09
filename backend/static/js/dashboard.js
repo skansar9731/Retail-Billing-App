@@ -100,5 +100,63 @@ if (
         }
 
     });
+const invoiceToggle =
+    document.getElementById(
+        "invoiceToggle"
+    );
 
+const invoiceMenu =
+    document.getElementById(
+        "invoiceMenu"
+    );
+
+const invoiceArrow =
+    document.getElementById(
+        "invoiceArrow"
+    );
+
+
+if (
+
+    invoiceToggle &&
+
+    invoiceMenu &&
+
+    invoiceArrow
+
+) {
+
+    invoiceToggle.addEventListener(
+        "click",
+        () => {
+
+            if (
+
+                invoiceMenu.style.display
+                === "block"
+
+            ) {
+
+                invoiceMenu.style.display =
+                    "none";
+
+                invoiceArrow.style.transform =
+                    "rotate(0deg)";
+
+            }
+
+            else {
+
+                invoiceMenu.style.display =
+                    "block";
+
+                invoiceArrow.style.transform =
+                    "rotate(180deg)";
+
+            }
+
+        }
+    );
+
+}
 }
