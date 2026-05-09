@@ -64,4 +64,8 @@ path(
     'debts/',
     include('debts.urls')
 ),
+path(
+    'stock/',
+    include('stock.urls')
+),
 ]

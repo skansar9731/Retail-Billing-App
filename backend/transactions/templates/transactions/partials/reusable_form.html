@@ -127,63 +127,404 @@
 
         {% csrf_token %}
 
+        <!-- Party Name -->
+
+<div class="relative group">
+
+    <select
+        name="party"
+        required
+
+        class="
+            peer
+            w-full
+            rounded-2xl
+            border
+            border-cyan-400/20
+            bg-white/5
+            px-5
+            pt-7
+            pb-3
+            text-white
+            outline-none
+            appearance-none
+            transition-all
+            duration-300
+            focus:border-cyan-300
+            focus:shadow-[0_0_20px_rgba(34,211,238,0.45)]
+            focus:bg-white/10
+        "
+    >
+
+        <option value="" disabled selected hidden></option>
+
+        {% if title == 'Purchase Entry' %}
+
+            {% for item in creditors %}
+
+                <option
+                    value="{{ item.party_name }}"
+                    class="bg-[#0b1730] text-white"
+                >
+                    {{ item.party_name }}
+                </option>
+
+            {% endfor %}
+
+        {% endif %}
+
+        {% if title == 'Sales Entry' %}
+
+            {% for item in debtors %}
+
+                <option
+                    value="{{ item.party_name }}"
+                    class="bg-[#0b1730] text-white"
+                >
+                    {{ item.party_name }}
+                </option>
+
+            {% endfor %}
+
+        {% endif %}
+
+    </select>
+
+    <label
+        class="
+            absolute
+            left-5
+            top-1/2
+            -translate-y-1/2
+            text-gray-400
+            transition-all
+            duration-300
+            pointer-events-none
+
+            peer-focus:top-3
+            peer-focus:text-xs
+            peer-focus:text-cyan-300
+
+            peer-valid:top-3
+            peer-valid:text-xs
+            peer-valid:text-cyan-300
+        "
+    >
+        {% if title == 'Purchase Entry' %}
+            Supplier Name
+        {% else %}
+            Customer Name
+        {% endif %}
+    </label>
+
+</div>
+
+<!-- Transaction Date -->
+
+<div class="relative group">
+
+    <input
+        type="date"
+        name="transaction_date"
+
+        value="{% now 'Y-m-d' %}"
+
+        required
+
+        class="
+            peer
+            w-full
+            rounded-2xl
+            border
+            border-cyan-400/20
+            bg-white/5
+            px-5
+            pt-7
+            pb-3
+            text-white
+            outline-none
+            transition-all
+            duration-300
+            focus:border-cyan-300
+            focus:shadow-[0_0_20px_rgba(34,211,238,0.45)]
+            focus:bg-white/10
+        "
+    >
+
+    <label
+        class="
+            absolute
+            left-5
+            top-3
+            text-xs
+            text-cyan-300
+        "
+    >
+        Transaction Date
+    </label>
+
+</div>
+
         <!-- Product Name -->
 
-        <div class="relative group">
+        <!-- Product Name -->
 
-            <input
-                type="text"
-                name="product_name"
-                placeholder=" "
-                required
+<div class="relative group">
 
+    <input
+        type="text"
+        name="product_name"
+        id="productSearch"
+        placeholder=" "
+        autocomplete="off"
+        required
+
+        class="
+            peer
+            w-full
+            rounded-2xl
+            border
+            border-cyan-400/20
+            bg-white/5
+            px-5
+            pt-7
+            pb-3
+            text-white
+            outline-none
+            transition-all
+            duration-300
+
+            focus:border-cyan-300
+
+            focus:shadow-[0_0_20px_rgba(34,211,238,0.45)]
+
+            focus:bg-white/10
+        "
+    >
+
+    <label
+        class="
+            absolute
+            left-5
+            top-1/2
+            -translate-y-1/2
+            text-gray-400
+            transition-all
+            duration-300
+            pointer-events-none
+
+            peer-focus:top-3
+            peer-focus:text-xs
+            peer-focus:text-cyan-300
+
+            peer-valid:top-3
+            peer-valid:text-xs
+            peer-valid:text-cyan-300
+        "
+    >
+        Product Name
+    </label>
+
+    <!-- Suggestions -->
+
+    <div
+        id="productSuggestions"
+        class="
+            absolute
+            left-0
+            top-full
+            z-50
+            mt-2
+            hidden
+            max-h-72
+            w-full
+            overflow-y-auto
+            rounded-2xl
+            border
+            border-cyan-400/20
+            bg-[#091428]
+            shadow-[0_0_25px_rgba(34,211,238,0.18)]
+        "
+    >
+
+        {% for item in stocks %}
+
+            <div
                 class="
-                    peer
-                    w-full
-                    rounded-2xl
-                    border
-                    border-cyan-400/20
-                    bg-white/5
+                    cursor-pointer
+                    border-b
+                    border-cyan-400/10
                     px-5
-                    pt-7
-                    pb-3
-                    text-white
-                    outline-none
+                    py-4
                     transition-all
                     duration-300
-
-                    focus:border-cyan-300
-
-                    focus:shadow-[0_0_20px_rgba(34,211,238,0.45)]
-
-                    focus:bg-white/10
+                    hover:bg-cyan-500/10
                 "
+
+               onclick="
+    selectProduct(
+        '{{ item.product_name }}',
+        '{{ item.unit }}',
+        '{{ item.purchase_price }}',
+        '{{ item.selling_price }}'
+    )
+"
             >
 
-            <label
-                class="
-                    absolute
-                    left-5
-                    top-1/2
-                    -translate-y-1/2
-                    text-gray-400
-                    transition-all
-                    duration-300
-                    pointer-events-none
+                <div
+                    class="
+                        flex
+                        items-center
+                        justify-between
+                    "
+                >
 
-                    peer-focus:top-3
-                    peer-focus:text-xs
-                    peer-focus:text-cyan-300
+                    <span
+                        class="
+                            font-medium
+                            text-white
+                        "
+                    >
+                        {{ item.product_name }}
+                    </span>
 
-                    peer-valid:top-3
-                    peer-valid:text-xs
-                    peer-valid:text-cyan-300
-                "
-            >
-                Product Name
-            </label>
+                    <span
+                        class="
+                            rounded-xl
+                            bg-cyan-500/10
+                            px-3
+                            py-1
+                            text-xs
+                            text-cyan-300
+                        "
+                    >
+                        Qty :
+                        {{ item.quantity }}
+                    </span>
 
-        </div>
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+               <!-- Unit Type -->
+
+<div class="relative group">
+
+    <select
+        name="unit"
+            id="unitType"
+        required
+
+        class="
+            peer
+            w-full
+            rounded-2xl
+            border
+            border-cyan-400/20
+            bg-white/5
+
+            px-5
+            pt-7
+            pb-3
+
+            text-white
+            outline-none
+            appearance-none
+
+            transition-all
+            duration-300
+
+            focus:border-cyan-300
+
+            focus:shadow-[0_0_20px_rgba(34,211,238,0.45)]
+
+            focus:bg-white/10
+        "
+    >
+
+        <option value="" disabled selected hidden></option>
+
+        <option
+    value="Pieces"
+    class="bg-[#0b1730] text-white"
+>
+    Pieces
+</option>
+
+<option
+    value="Feet"
+    class="bg-[#0b1730] text-white"
+>
+    Feet
+</option>
+
+<option
+    value="Meter"
+    class="bg-[#0b1730] text-white"
+>
+    Meter
+</option>
+
+<option
+    value="Roll"
+    class="bg-[#0b1730] text-white"
+>
+    Roll
+</option>
+
+    </select>
+
+    <!-- Floating Label -->
+
+    <label
+        class="
+            absolute
+            left-5
+            top-1/2
+            -translate-y-1/2
+
+            text-gray-400
+
+            transition-all
+            duration-300
+
+            pointer-events-none
+
+            peer-focus:top-3
+            peer-focus:text-xs
+            peer-focus:text-cyan-300
+
+            peer-valid:top-3
+            peer-valid:text-xs
+            peer-valid:text-cyan-300
+        "
+    >
+        Unit Type
+    </label>
+
+    <!-- Custom Arrow -->
+
+    <div
+        class="
+            pointer-events-none
+            absolute
+            right-5
+            top-1/2
+            -translate-y-1/2
+            text-cyan-300
+            text-sm
+        "
+    >
+        ▼
+    </div>
+
+</div> 
 
        <!-- Quantity -->
 
@@ -244,12 +585,13 @@
         </div>
 
          <!-- Selling Price -->
-
+{% if title == 'Sales Entry' %}
         <div class="relative group">
 
             <input
                 type="number"
                 step="0.01"
+                id="sellingPrice"
                 name="selling_price"
                 placeholder=" "
                 required
@@ -301,7 +643,7 @@
             </label>
 
         </div>
-        
+        {% endif %}
        
 
         <!-- Purchase Price -->
@@ -311,6 +653,7 @@
             <input
                 type="number"
                 step="0.01"
+                id="purchasePrice"
                 name="purchase_price"
                 placeholder=" "
                 required
@@ -362,129 +705,59 @@
             </label>
 
         </div>
-
-    <!-- Unit -->
-
-       <!-- Unit Type -->
+<!-- Total Amount -->
 
 <div class="relative group">
 
-    <select
-        name="unit"
-        required
+    <input
+        type="text"
+        id="totalAmount"
+        readonly
 
         class="
             peer
             w-full
             rounded-2xl
             border
-            border-cyan-400/20
-            bg-white/5
-
+            border-green-400/20
+            bg-green-500/5
             px-5
             pt-7
             pb-3
-
-            text-white
+            text-green-300
             outline-none
-            appearance-none
-
             transition-all
             duration-300
-
-            focus:border-cyan-300
-
-            focus:shadow-[0_0_20px_rgba(34,211,238,0.45)]
-
-            focus:bg-white/10
         "
     >
-
-        <option value="" disabled selected hidden></option>
-
-        <option
-    value="pcs"
-    class="bg-[#0b1730] text-white"
->
-    Pieces
-</option>
-
-<option
-    value="ft"
-    class="bg-[#0b1730] text-white"
->
-    Feet
-</option>
-
-<option
-    value="mtr"
-    class="bg-[#0b1730] text-white"
->
-    Meter
-</option>
-
-<option
-    value="roll"
-    class="bg-[#0b1730] text-white"
->
-    Roll
-</option>
-
-    </select>
-
-    <!-- Floating Label -->
 
     <label
         class="
             absolute
             left-5
-            top-1/2
-            -translate-y-1/2
-
-            text-gray-400
-
-            transition-all
-            duration-300
-
-            pointer-events-none
-
-            peer-focus:top-3
-            peer-focus:text-xs
-            peer-focus:text-cyan-300
-
-            peer-valid:top-3
-            peer-valid:text-xs
-            peer-valid:text-cyan-300
+            top-3
+            text-xs
+            text-green-300
         "
     >
-        Unit Type
+        Total Amount
     </label>
 
-    <!-- Custom Arrow -->
+</div>
+    <!-- Unit -->
 
-    <div
-        class="
-            pointer-events-none
-            absolute
-            right-5
-            top-1/2
-            -translate-y-1/2
-            text-cyan-300
-            text-sm
-        "
-    >
-        ▼
-    </div>
 
-</div> 
 
  <!-- Net Profit -->
+{% if title == 'Sales Entry' %}
 
         <div class="relative group">
 
             <input
                 type="text"
-                name="sku"
+                name="net_profit"
+id="netProfit"
+readonly
                 placeholder=" "
                 required
 
@@ -535,7 +808,7 @@
             </label>
 
         </div>
-
+{% endif %}
         <!-- Submit Button -->
 
         <div class="md:col-span-2">
@@ -572,5 +845,314 @@
     </form>
 
 </div>
+<script>
+
+    const quantityInput =
+        document.querySelector(
+            'input[name="quantity"]'
+        );
+
+    const purchaseInput =
+        document.querySelector(
+            'input[id="purchasePrice"]'
+        );
+
+    const totalInput =
+        document.getElementById(
+            'totalAmount'
+        );
+
+   function calculateTotal() {
+
+    const quantity =
+        parseFloat(
+            quantityInput.value
+        ) || 0;
+
+    // Sales Price
+
+    const sellingInput =
+        document.getElementById(
+            'sellingPrice'
+        );
+
+    let selling = 0;
+
+    if (sellingInput) {
+
+        selling =
+            parseFloat(
+                sellingInput.value
+            ) || 0;
+
+    }
+
+    // Purchase Entry
+
+    else {
+
+        selling =
+            parseFloat(
+                purchaseInput.value
+            ) || 0;
+
+    }
+
+    // Final Total
+
+    const total =
+        quantity * selling;
+
+    totalInput.value =
+        '₹ ' + total.toFixed(2);
+
+}
+
+    quantityInput.addEventListener(
+    'input',
+    () => {
+
+        calculateTotal();
+
+        updateProfit();
+
+    }
+);
+
+   purchaseInput.addEventListener(
+    'input',
+    () => {
+
+        calculateTotal();
+
+        updateProfit();
+
+    }
+);
+
+    const sellingPriceInput =
+    document.getElementById(
+        'sellingPrice'
+    );
+
+if (sellingPriceInput) {
+
+    sellingPriceInput.addEventListener(
+    'input',
+    () => {
+
+        calculateTotal();
+
+        updateProfit();
+
+    }
+);
+
+}
+
+    const productSearch =
+        document.getElementById(
+            'productSearch'
+        );
+
+    const productSuggestions =
+        document.getElementById(
+            'productSuggestions'
+        );
+
+    const suggestionItems =
+        productSuggestions.querySelectorAll(
+            'div[onclick]'
+        );
+
+    // Open Suggestions
+
+    productSearch.addEventListener(
+        'focus',
+        () => {
+
+            productSuggestions
+                .classList
+                .remove('hidden');
+
+        }
+    );
+
+    // Search Filter
+
+    productSearch.addEventListener(
+        'keyup',
+        () => {
+
+            const value =
+                productSearch.value
+                .toLowerCase();
+
+            suggestionItems.forEach((item) => {
+
+                const text =
+                    item.innerText
+                    .toLowerCase();
+
+                item.style.display =
+                    text.includes(value)
+
+                    ? 'block'
+
+                    : 'none';
+
+            });
+
+        }
+    );
+
+    // Select Product
+
+  function selectProduct(
+    name,
+    unit,
+    purchase,
+    selling
+) {
+
+    // Product Name
+
+    productSearch.value = name;
+
+    // Unit
+
+    document.getElementById(
+        'unitType'
+    ).value = unit;
+
+    // Purchase Price
+
+    document.getElementById(
+        'purchasePrice'
+    ).value = purchase;
+
+    // Selling Price
+
+    const sellingInput =
+        document.getElementById(
+            'sellingPrice'
+        );
+
+    if (sellingInput) {
+
+        sellingInput.value = selling;
+
+    }
+
+    // Net Profit
+
+    const netProfitInput =
+        document.getElementById(
+            'netProfit'
+        );
+
+    if (
+        netProfitInput &&
+        selling
+    ) {
+
+        const quantity =
+    parseFloat(
+        quantityInput.value
+    ) || 0;
+
+const singleProfit =
+    parseFloat(selling)
+    -
+    parseFloat(purchase);
+
+const totalProfit =
+    singleProfit * quantity;
+
+netProfitInput.value =
+    '₹ ' + totalProfit.toFixed(2);
+
+    }
+
+    // Close Suggestions
+
+    productSuggestions
+        .classList
+        .add('hidden');
+
+    // Recalculate Total
+
+    calculateTotal();
+
+}
+calculateTotal();
+    // Outside Click Close
+
+    document.addEventListener(
+        'click',
+        (e) => {
+
+            if (
+                !productSearch.contains(e.target)
+                &&
+                !productSuggestions.contains(e.target)
+            ) {
+
+                productSuggestions
+                    .classList
+                    .add('hidden');
+
+            }
+
+        }
+    );
+
+function updateProfit() {
+
+    const sellingInput =
+        document.getElementById(
+            'sellingPrice'
+        );
+
+    const netProfitInput =
+        document.getElementById(
+            'netProfit'
+        );
+
+    if (
+        !sellingInput ||
+        !netProfitInput
+    ) {
+        return;
+    }
+
+    const quantity =
+        parseFloat(
+            quantityInput.value
+        ) || 0;
+
+    const selling =
+        parseFloat(
+            sellingInput.value
+        ) || 0;
+
+    const purchase =
+        parseFloat(
+            purchaseInput.value
+        ) || 0;
+
+    const totalProfit =
+        (
+            selling - purchase
+        ) * quantity;
+
+    netProfitInput.value =
+        '₹ ' +
+        totalProfit.toFixed(2);
+
+}
+calculateTotal();
+updateProfit();
+</script>
 </body>
 </html>

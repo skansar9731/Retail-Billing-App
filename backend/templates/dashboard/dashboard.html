@@ -510,7 +510,7 @@ style="display: none;"
     <!-- Stock -->
 
     <a
-        href="/stock/"
+        href="/dashboard/?page=stock"
         class="
             flex
             items-center
@@ -717,6 +717,10 @@ style="display: none;"
 {% elif page == 'creditors' %}
 
     {% include 'debts/creditors.html' %}
+
+    {% elif page == 'stock' %}
+
+    {% include 'stock/stock.html' %}
 
 {% else %}
 
